@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Wallet wallet = new Wallet();
+            wallet.MainLoop();
         }
     }
 }
