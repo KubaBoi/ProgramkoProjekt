@@ -21,6 +21,7 @@ public class Texts
         Vydaje za x dni zpet    [d <x>] (pokud x chybi, pak se vypise dnes)
         Vydaje podle kategorie  [f <kategorie>]
 
+        Cesta nactene penezenky [v]
         Nastavit razeni         [c <razeniPodle> <smer>] (vychozi razeni je '0' a smer '1')
         Vypsat kategorie        [y]
         Odejit                  [x]
@@ -38,8 +39,8 @@ public class Texts
     public const string SELECT_MENU = "Zadejte volbu (pro pomoc [h])";
     public const string INPUT_FILE = "Zadejte cestu k souboru";
     public const string EXPENSE_ADDED = "Vydaj pridan";
-    public const string WALLET_LOADED = "Penezenka uspesne nactena";
-    public const string WALLET_SAVED = "Penezenka uspesne ulozena";
+    public const string WALLET_LOADED = "Penezenka uspesne nactena:\n'{0}'";
+    public const string WALLET_SAVED = "Penezenka uspesne ulozena:\n'{0}'";
 
     public const string ITEMS_COUNT = "Pocet polozek: {0}";
     public const string ITEMS_SUM = "Soucet polozek: {0}";

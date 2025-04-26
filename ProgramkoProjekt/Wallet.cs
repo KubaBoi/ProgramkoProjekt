@@ -55,6 +55,9 @@ public class Wallet
                     break;
 
                 // ovladani
+                case 'v':
+                    Console.WriteLine(_walletPath);
+                    break;
                 case 'c': // razeni
                     SetOrder(input);
                     break;
@@ -84,11 +87,11 @@ public class Wallet
             return;
         }
 
-        _walletPath = InputService.InputLine(Texts.INPUT_FILE);
+        var path = InputService.InputLine(Texts.INPUT_FILE);
 
         // nacteni penezenky, pokud bude penezenka null (nepodari se nacist)
         // pak se pouzije drive nactena
-        _wallet = FileService.LoadWallet(_walletPath) ?? _wallet;
+        _wallet = FileService.LoadWallet(path, ref _walletPath) ?? _wallet;
     }
 
     private void Export()
@@ -105,7 +108,7 @@ public class Wallet
             path = InputService.InputLine(Texts.INPUT_FILE, _walletPath);
         }
 
-        FileService.ExportWallet(path!, _wallet);
+        FileService.ExportWallet(path!, _wallet, ref _walletPath);
     }
 
     /// <summary>

@@ -1,4 +1,6 @@
-﻿namespace ProgramkoProjekt;
+﻿using System.IO;
+
+namespace ProgramkoProjekt;
 
 /// <summary>
 /// Třída pro načítání a ukládání souborů peneženky.
@@ -10,9 +12,16 @@ public class FileService
     /// Nacteni souboru s penezenkou
     /// </summary>
     /// <param name="filePath">Cesta k souboru</param>
+    /// <param name="walletPath">Reference promenne, do ktere bude v pripade uspechu zapsana cela cesta souboru</param>
     /// <returns>Nactena data, pripade chyby <see langword="null"/></returns>
-    public static List<Expense>? LoadWallet(string filePath)
+    public static List<Expense>? LoadWallet(string filePath, ref string? walletPath)
     {
+        // pridani suffixu souboru
+        if (!filePath.EndsWith(".csv"))
+        {
+            filePath += ".csv";
+        }
+
         // kontrola jestli soubor existuje
         if (!File.Exists(filePath))
         {
@@ -60,6 +69,8 @@ public class FileService
                 // pridani nove polozky do kolekce
                 resp.Add(new Expense(date, cost, parts[2], parts[3]));
             }
+
+            walletPath = ((FileStream)(reader.BaseStream)).Name;
         }
         catch (Exception ex)
         {
@@ -68,23 +79,32 @@ public class FileService
             return null;
         }
 
-        Console.WriteLine(Texts.WALLET_LOADED);
+        Console.WriteLine(Texts.WALLET_LOADED, walletPath);
         // serazeni pro defaultni stav razeni
-        return [.. resp.OrderBy(x => x.Date)];
+        return [.. resp.OrderByDescending(x => x.Date)];
     }
 
     /// <summary>
     /// Ulozi data penezenky do souboru
     /// </summary>
     /// <param name="filePath">Cesta k souboru</param>
-    /// <param name="expenses">Data k ulzeni</param>
-    public static void ExportWallet(string filePath, List<Expense>? expenses)
+    /// <param name="expenses">Data k ulozeni</param>
+    /// <param name="walletPath">Reference promenne, do ktere bude v pripade uspechu zapsana cela cesta souboru</param>
+    public static void ExportWallet(string filePath,
+                                    List<Expense>? expenses,
+                                    ref string? walletPath)
     {
         // kontrola jestli ukladana ponezenka neni null
-        if (expenses is null)
+        if (expenses is null || expenses.Count == 0)
         {
             Console.WriteLine(Texts.EMPTY_WALLET);
             return;
+        }
+
+        // pridani suffixu souboru
+        if (!filePath.EndsWith(".csv"))
+        {
+            filePath += ".csv";
         }
 
         try
@@ -96,6 +116,8 @@ public class FileService
                 // vypsani kazde polozky do souboru jako samostatny radek
                 file.WriteLine($"{exp.Date};{exp.Cost};{exp.Category};{exp.Description}");
             }
+
+            walletPath = ((FileStream)(file.BaseStream)).Name;
         }
         catch (Exception ex)
         {
@@ -104,7 +126,7 @@ public class FileService
             return;
         }
 
-        Console.WriteLine(Texts.WALLET_SAVED);
+        Console.WriteLine(Texts.WALLET_SAVED, walletPath);
     }
 }
 
