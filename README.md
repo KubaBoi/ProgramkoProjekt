@@ -55,43 +55,43 @@ Program je rozdělen na několik funkčních tříd:
 
 ### Wallet
 
-Hlavní třída p�n�enky, vypisuje menu, p�ij�m� vstupy a spou�t� 
-jednotliv� p��kazy.
+Hlavní třída pěnženky, vypisuje menu, přijímá vstupy a spouští 
+jednotlivé příkazy.
 
-D�le udr�uje data o na�ten�ch v�daj�ch, cestu k na�ten�mu souboru
-a nastaven� �azen�.
+Dále udržuje data o načtených výdajích, cestu k načtenému souboru
+a nastavení řazení.
 
 ### Expense
 
-Datov� `record`, kter� reprezentuje jeden v�daj. 
-Obsahuje polo�ky:
+Datové `record`, který reprezentuje jeden výdaj. 
+Obsahuje položky:
 
-- `Date` datum zad�n�
-- `Cost` ��stka v�daje
-- `Category` kategorie pro shlukov�n� v�daj�
-- `Description` kr�tky popis v�daje
+- `Date` datum zadání
+- `Cost` částka výdaje
+- `Category` kategorie pro shlukování výdajů
+- `Description` krátký popis výdaje
 
 ### FileService
 
-T��da obsahuje metody `LoadWallet` a `ExportWallet`. 
-Slou�� pro na��t�n� a ukl�d�n� dat do soubor�.
+Třída obsahuje metody `LoadWallet` a `ExportWallet`. 
+Slouží pro načítání a ukládání dat do souborů.
 
-Kontroluje existenci souboru v p��pad� na��t�n� a cel� proces �ten�/psan�
-je podchycen `try-catch` blokem pro neo�ek�van� v�jimky.
+Kontroluje existenci souboru v případě načítání a celý proces čtení/psaní
+je podchycen `try-catch` blokem pro neočekávané výjimky.
 
 ### InputService
 
-T��da obsahuje metody pro na��t�n� vstupu u�ivatele z konzole.
+Třída obsahuje metody pro načítání vstupu uživatele z konzole.
 
 ### TablePrinter
 
-Tato t��da obsahuje metody pro vypisov�n� v�daj� na obrazovku
-ve form� tabulek.
+Tato třída obsahuje metody pro vypisování výdajů na obrazovku
+ve formě tabulek.
 
-Umo��uje �azen� nebo filtraci dat.
+Umožňuje řazení nebo filtraci dat.
 
 ### Texts
 
-T��da pouze dr�� statick� konstatn� prom�nn� s texty programu.
+Třída pouze poskytuje statické konstatní proměnné s texty programu.
 
 
